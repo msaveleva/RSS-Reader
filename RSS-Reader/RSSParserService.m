@@ -16,6 +16,7 @@
 @property (nonatomic, strong, nullable) NSMutableArray *feeds;
 @property (nonatomic, strong, nullable) NSMutableDictionary *tmpItem;
 @property (nonatomic, strong, nullable) NSMutableString *tmpTitle;
+@property (nonatomic, strong, nullable) NSMutableString *tmpDescription;
 @property (nonatomic, strong, nullable) NSString *tmpElement;
 
 @end
@@ -26,7 +27,7 @@
 
 - (void)parseData:(NSData *)data {
     self.feeds = [NSMutableArray new];
-    
+
     self.xmlParser = [[NSXMLParser alloc] initWithData:data];
     self.xmlParser.delegate = self;
     self.xmlParser.shouldResolveExternalEntities = NO;
@@ -45,12 +46,14 @@
     if ([self.tmpElement isEqualToString:@"item"]) {
         self.tmpItem = [NSMutableDictionary new];
         self.tmpTitle = [NSMutableString new];
+        self.tmpDescription = [NSMutableString new];
     }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:@"item"]) {
         [self.tmpItem setObject:self.tmpTitle forKey:@"title"];
+        [self.tmpItem setObject:self.tmpDescription forKey:@"description"];
 
         [self.feeds addObject:[self.tmpItem copy]];
     }
@@ -59,6 +62,8 @@
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
     if ([self.tmpElement isEqualToString:@"title"]) {
         [self.tmpTitle appendString:string];
+    } else if ([self.tmpElement isEqualToString:@"description"]) {
+        [self.tmpDescription appendString:string];
     }
 }
 
