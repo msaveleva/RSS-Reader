@@ -8,6 +8,13 @@
 
 #import "SourcesManager.h"
 #import "FeedItem.h"
+#import "ConnectionSerivce.h"
+
+@interface SourcesManager()
+
+@property (nonatomic, strong, nullable) ConnectionSerivce *connectionService;
+
+@end
 
 @implementation SourcesManager
 
@@ -21,8 +28,27 @@
     return sharedInstance;
 }
 
+
+#pragma mark - Public methods
+
 - (void)fetchFeedItemsForSource:(NSString *)rssSource completion:(nullable void (^)(NSArray<FeedItem *> *items))completion {
-    //TODO: implement
+    NSURL *url = [NSURL URLWithString:rssSource];
+    [self.connectionService loadDataWithURL:url completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
+        NSLog(@"%@", resultData);
+    }];
+
+    //TODO: parse data with parsing service
+}
+
+
+#pragma mark Private methods
+
+- (ConnectionSerivce *)connectionService {
+    if (_connectionService == nil) {
+        _connectionService = [ConnectionSerivce new];
+    }
+
+    return _connectionService;
 }
 
 @end

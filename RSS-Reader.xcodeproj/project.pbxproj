@@ -15,6 +15,7 @@
 		CF43BEDB1E4B11960011A594 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF43BED91E4B11960011A594 /* LaunchScreen.storyboard */; };
 		CF43BEE51E4B12540011A594 /* SourcesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BEE41E4B12540011A594 /* SourcesManager.m */; };
 		CF43BEE91E4B12B40011A594 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BEE81E4B12B40011A594 /* FeedItem.m */; };
+		CFD393E01E4B348A00EF587C /* ConnectionSerivce.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD393DF1E4B348A00EF587C /* ConnectionSerivce.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		CF43BEE41E4B12540011A594 /* SourcesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourcesManager.m; sourceTree = "<group>"; };
 		CF43BEE71E4B12B40011A594 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		CF43BEE81E4B12B40011A594 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
+		CFD393DE1E4B348A00EF587C /* ConnectionSerivce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionSerivce.h; sourceTree = "<group>"; };
+		CFD393DF1E4B348A00EF587C /* ConnectionSerivce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionSerivce.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,7 @@
 		CF43BECA1E4B11960011A594 /* RSS-Reader */ = {
 			isa = PBXGroup;
 			children = (
+				CFD393E11E4B348E00EF587C /* Services */,
 				CF43BEE61E4B12900011A594 /* Model */,
 				CF43BEE21E4B12290011A594 /* Managers */,
 				CF43BECE1E4B11960011A594 /* AppDelegate.h */,
@@ -103,6 +107,15 @@
 				CF43BEE81E4B12B40011A594 /* FeedItem.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		CFD393E11E4B348E00EF587C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CFD393DE1E4B348A00EF587C /* ConnectionSerivce.h */,
+				CFD393DF1E4B348A00EF587C /* ConnectionSerivce.m */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF43BED31E4B11960011A594 /* ViewController.m in Sources */,
+				CFD393E01E4B348A00EF587C /* ConnectionSerivce.m in Sources */,
 				CF43BEE91E4B12B40011A594 /* FeedItem.m in Sources */,
 				CF43BED01E4B11960011A594 /* AppDelegate.m in Sources */,
 				CF43BEE51E4B12540011A594 /* SourcesManager.m in Sources */,
