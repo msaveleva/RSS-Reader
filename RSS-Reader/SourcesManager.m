@@ -9,10 +9,12 @@
 #import "SourcesManager.h"
 #import "FeedItem.h"
 #import "ConnectionSerivce.h"
+#import "RSSParserService.h"
 
 @interface SourcesManager()
 
 @property (nonatomic, strong, nullable) ConnectionSerivce *connectionService;
+@property (nonatomic, strong, nullable) RSSParserService *parserService;
 
 @end
 
@@ -35,6 +37,11 @@
     NSURL *url = [NSURL URLWithString:rssSource];
     [self.connectionService loadDataWithURL:url completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
         NSLog(@"%@", resultData);
+
+        if (resultData != nil && error == nil) {
+            //TODO: fix to weakself
+            [self.parserService parseData:resultData];
+        }
     }];
 
     //TODO: parse data with parsing service
@@ -49,6 +56,14 @@
     }
 
     return _connectionService;
+}
+
+- (RSSParserService *)parserService {
+    if (_parserService == nil) {
+        _parserService = [RSSParserService new];
+    }
+
+    return _parserService;
 }
 
 @end
