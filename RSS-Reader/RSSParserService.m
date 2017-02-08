@@ -31,6 +31,8 @@
     self.xmlParser = [[NSXMLParser alloc] initWithData:data];
     self.xmlParser.delegate = self;
     self.xmlParser.shouldResolveExternalEntities = NO;
+    self.xmlParser.shouldProcessNamespaces = YES;
+    self.xmlParser.shouldReportNamespacePrefixes = YES;
     [self.xmlParser parse];
 }
 
@@ -47,6 +49,13 @@
         self.tmpItem = [NSMutableDictionary new];
         self.tmpTitle = [NSMutableString new];
         self.tmpDescription = [NSMutableString new];
+    } else if ([qName isEqualToString:@"media:thumbnail"]) {
+        //Add image to current item
+        NSString *imageUrl = attributeDict[@"url"];
+
+        if (imageUrl != nil) {
+            [self.tmpItem setObject:imageUrl forKey:@"imageUrl"];
+        }
     }
 }
 
@@ -69,6 +78,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     //here is my data array
+    NSLog(@"%@", self.feeds);
 }
 
 @end

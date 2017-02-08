@@ -36,8 +36,6 @@
 - (void)fetchFeedItemsForSource:(NSString *)rssSource completion:(nullable void (^)(NSArray<FeedItem *> *items))completion {
     NSURL *url = [NSURL URLWithString:rssSource];
     [self.connectionService loadDataWithURL:url completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
-        NSLog(@"%@", resultData);
-
         if (resultData != nil && error == nil) {
             //TODO: fix to weakself
             [self.parserService parseData:resultData];
