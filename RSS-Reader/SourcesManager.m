@@ -10,13 +10,16 @@
 #import "FeedItem.h"
 #import "ConnectionSerivce.h"
 #import "RSSParserService.h"
+#import "Constants.h"
 
-@interface SourcesManager()
+@interface SourcesManager() <RSSParserServiceDelegate>
 
 @property (nonatomic, strong, nullable) ConnectionSerivce *connectionService;
 @property (nonatomic, strong, nullable) RSSParserService *parserService;
+@property (nonatomic, strong, nullable) NSArray <FeedItem *> *feeds;
 
 @end
+
 
 @implementation SourcesManager
 
@@ -41,12 +44,10 @@
             [self.parserService parseData:resultData];
         }
     }];
-
-    //TODO: parse data with parsing service
 }
 
 
-#pragma mark Private methods
+#pragma mark - Private methods
 
 - (ConnectionSerivce *)connectionService {
     if (_connectionService == nil) {
@@ -59,9 +60,20 @@
 - (RSSParserService *)parserService {
     if (_parserService == nil) {
         _parserService = [RSSParserService new];
+        _parserService.delegate = self;
     }
 
     return _parserService;
+}
+
+
+#pragma mark - RSSParserServiceDelegate methods
+
+- (void)handleParsedData:(NSArray<FeedItem *> *)feeds {
+    self.feeds = feeds;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRSSDataReceived
+                                                        object:nil];
 }
 
 @end

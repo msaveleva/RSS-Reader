@@ -24,6 +24,7 @@ static NSString * const kDescriptionKey = @"description";
 
 @end
 
+
 @implementation RSSParserService
 
 #pragma mark - Public methods
@@ -82,8 +83,7 @@ static NSString * const kDescriptionKey = @"description";
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    //here is my data array
-    NSLog(@"%@", self.tmpFeeds);
+    [self.delegate handleParsedData:[self.tmpFeeds copy]];
 }
 
 @end

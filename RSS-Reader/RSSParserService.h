@@ -10,7 +10,15 @@
 
 @class FeedItem;
 
+@protocol RSSParserServiceDelegate <NSObject>
+
+- (void)handleParsedData:(NSArray <FeedItem *> *)feeds;
+
+@end
+
 @interface RSSParserService : NSObject <NSXMLParserDelegate>
+
+@property (nonatomic, strong) id<RSSParserServiceDelegate> delegate;
 
 /// Parses RSS XML data.
 - (void)parseData:(NSData *)data;
