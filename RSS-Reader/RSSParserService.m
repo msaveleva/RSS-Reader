@@ -17,8 +17,7 @@ static NSString * const kDescriptionKey = @"description";
 
 @property (nonatomic, strong, nullable) NSXMLParser *xmlParser;
 
-@property (nonatomic, strong, nullable) NSMutableArray *feeds;
-@property (nonatomic, strong, nullable) NSMutableDictionary *tmpItem;
+@property (nonatomic, strong, nullable) NSMutableArray <FeedItem *> *tmpFeeds;
 @property (nonatomic, strong, nullable) NSMutableString *tmpTitle;
 @property (nonatomic, strong, nullable) NSMutableString *tmpDescription;
 @property (nonatomic, strong, nullable) NSString *tmpElement;
@@ -30,7 +29,7 @@ static NSString * const kDescriptionKey = @"description";
 #pragma mark - Public methods
 
 - (void)parseData:(NSData *)data {
-    self.feeds = [NSMutableArray new];
+    self.tmpFeeds = [NSMutableArray new];
 
     self.xmlParser = [[NSXMLParser alloc] initWithData:data];
     self.xmlParser.delegate = self;
@@ -50,7 +49,6 @@ static NSString * const kDescriptionKey = @"description";
     self.tmpElement = elementName;
 
     if ([self.tmpElement isEqualToString:kItemKey]) {
-        self.tmpItem = [NSMutableDictionary new];
         self.tmpTitle = [NSMutableString new];
         self.tmpDescription = [NSMutableString new];
     }
@@ -68,10 +66,10 @@ static NSString * const kDescriptionKey = @"description";
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:kItemKey]) {
-        [self.tmpItem setObject:self.tmpTitle forKey:kTitleKey];
-        [self.tmpItem setObject:self.tmpDescription forKey:kDescriptionKey];
+        FeedItem *feedItem = [[FeedItem alloc] initWithTitle:self.tmpTitle
+                                             feedDescription:self.tmpDescription];
 
-        [self.feeds addObject:[self.tmpItem copy]];
+        [self.tmpFeeds addObject:feedItem];
     }
 }
 
@@ -85,7 +83,7 @@ static NSString * const kDescriptionKey = @"description";
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
     //here is my data array
-    NSLog(@"%@", self.feeds);
+    NSLog(@"%@", self.tmpFeeds);
 }
 
 @end

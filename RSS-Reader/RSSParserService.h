@@ -12,6 +12,7 @@
 
 @interface RSSParserService : NSObject <NSXMLParserDelegate>
 
+/// Parses RSS XML data.
 - (void)parseData:(NSData *)data;
 
 @end

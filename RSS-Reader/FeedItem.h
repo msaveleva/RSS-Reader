@@ -11,6 +11,10 @@
 @interface FeedItem : NSObject
 
 - (nullable NSString *)title;
-- (nullable NSString *)description;
+- (nullable NSString *)feedDescription;
+
+/// Creates an instance of FeedItem with title and feedDescription.
+- (nonnull instancetype)initWithTitle:(nullable NSString *)title
+                      feedDescription:(nullable NSString *)feedDescription;
 
 @end

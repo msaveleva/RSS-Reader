@@ -11,10 +11,22 @@
 @interface FeedItem()
 
 @property (nonatomic, strong, nullable) NSString *title;
-@property (nonatomic, strong, nullable) NSString *descrition;
+@property (nonatomic, strong, nullable) NSString *feedDescription;
 
 @end
 
 @implementation FeedItem
+
+- (nonnull instancetype)initWithTitle:(nullable NSString *)title
+                      feedDescription:(nullable NSString *)feedDescription {
+    self = [super init];
+
+    if (self) {
+        _title = title;
+        _feedDescription = feedDescription;
+    }
+
+    return self;
+}
 
 @end
