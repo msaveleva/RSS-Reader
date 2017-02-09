@@ -63,6 +63,15 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		CF047CCE1E4C421B0053B48B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CF43BED11E4B11960011A594 /* ViewController.h */,
+				CF43BED21E4B11960011A594 /* ViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		CF43BEBF1E4B11960011A594 = {
 			isa = PBXGroup;
 			children = (
@@ -82,14 +91,13 @@
 		CF43BECA1E4B11960011A594 /* RSS-Reader */ = {
 			isa = PBXGroup;
 			children = (
+				CF047CCE1E4C421B0053B48B /* ViewControllers */,
 				CF047CCA1E4C40890053B48B /* Helpers */,
 				CFD393E11E4B348E00EF587C /* Services */,
 				CF43BEE61E4B12900011A594 /* Model */,
 				CF43BEE21E4B12290011A594 /* Managers */,
 				CF43BECE1E4B11960011A594 /* AppDelegate.h */,
 				CF43BECF1E4B11960011A594 /* AppDelegate.m */,
-				CF43BED11E4B11960011A594 /* ViewController.h */,
-				CF43BED21E4B11960011A594 /* ViewController.m */,
 				CF43BED41E4B11960011A594 /* Main.storyboard */,
 				CF43BED71E4B11960011A594 /* Assets.xcassets */,
 				CF43BED91E4B11960011A594 /* LaunchScreen.storyboard */,

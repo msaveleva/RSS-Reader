@@ -25,9 +25,7 @@
 
 - (void)testLoadingFeeds {
     NSString *kRSSTestString = @"http://images.apple.com/main/rss/hotnews/hotnews.rss";
-    [[SourcesManager sharedInstance] fetchFeedItemsForSource:kRSSTestString completion:^(NSArray<FeedItem *> * _Nonnull items) {
-        //check data
-    }];
+    [[SourcesManager sharedInstance] fetchFeedItemsForSource:kRSSTestString];
 }
 
 
