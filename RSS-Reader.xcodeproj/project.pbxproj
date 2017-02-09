@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF047CCD1E4C40D10053B48B /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = CF047CCC1E4C40D10053B48B /* Constants.m */; };
+		CF047CD21E4C43F70053B48B /* MainCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CF047CD11E4C43F70053B48B /* MainCollectionViewCell.m */; };
 		CF43BECD1E4B11960011A594 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BECC1E4B11960011A594 /* main.m */; };
 		CF43BED01E4B11960011A594 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BECF1E4B11960011A594 /* AppDelegate.m */; };
 		CF43BED31E4B11960011A594 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BED21E4B11960011A594 /* ViewController.m */; };
@@ -23,6 +24,8 @@
 /* Begin PBXFileReference section */
 		CF047CCB1E4C40D10053B48B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		CF047CCC1E4C40D10053B48B /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		CF047CD01E4C43F70053B48B /* MainCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCollectionViewCell.h; sourceTree = "<group>"; };
+		CF047CD11E4C43F70053B48B /* MainCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCollectionViewCell.m; sourceTree = "<group>"; };
 		CF43BEC81E4B11960011A594 /* RSS-Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RSS-Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF43BECC1E4B11960011A594 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF43BECE1E4B11960011A594 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,6 +75,15 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
+		CF047CCF1E4C43DD0053B48B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF047CD01E4C43F70053B48B /* MainCollectionViewCell.h */,
+				CF047CD11E4C43F70053B48B /* MainCollectionViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		CF43BEBF1E4B11960011A594 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +103,7 @@
 		CF43BECA1E4B11960011A594 /* RSS-Reader */ = {
 			isa = PBXGroup;
 			children = (
+				CF047CCF1E4C43DD0053B48B /* Views */,
 				CF047CCE1E4C421B0053B48B /* ViewControllers */,
 				CF047CCA1E4C40890053B48B /* Helpers */,
 				CFD393E11E4B348E00EF587C /* Services */,
@@ -218,6 +231,7 @@
 			files = (
 				CFD393E41E4B380600EF587C /* RSSParserService.m in Sources */,
 				CF43BED31E4B11960011A594 /* ViewController.m in Sources */,
+				CF047CD21E4C43F70053B48B /* MainCollectionViewCell.m in Sources */,
 				CFD393E01E4B348A00EF587C /* ConnectionSerivce.m in Sources */,
 				CF047CCD1E4C40D10053B48B /* Constants.m in Sources */,
 				CF43BEE91E4B12B40011A594 /* FeedItem.m in Sources */,
