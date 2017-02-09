@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "SourcesManager.h"
+
 
 @interface ViewController ()
 
@@ -16,13 +18,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    [self testLoadingFeeds];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)testLoadingFeeds {
+    NSString *kRSSTestString = @"http://images.apple.com/main/rss/hotnews/hotnews.rss";
+    [[SourcesManager sharedInstance] fetchFeedItemsForSource:kRSSTestString];
 }
 
 
