@@ -36,7 +36,7 @@
 
 #pragma mark - Public methods
 
-- (void)fetchFeedItemsForSource:(NSString *)rssSource completion:(nullable void (^)(NSArray<FeedItem *> *items))completion {
+- (void)fetchFeedItemsForSource:(NSString *)rssSource {
     NSURL *url = [NSURL URLWithString:rssSource];
     [self.connectionService loadDataWithURL:url completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
         if (resultData != nil && error == nil) {

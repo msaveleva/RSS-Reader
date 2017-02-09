@@ -16,8 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)sharedInstance;
 
-/// Returns an array of feed items for rss source.
-- (void)fetchFeedItemsForSource:(NSString *)rssSource completion:(nullable void (^)(NSArray<FeedItem *> *items))completion;
+/// Start fetching an array of feed items for rss source.
+- (void)fetchFeedItemsForSource:(NSString *)rssSource;
+
+/// Returnes fetched and parsed feed items. Available after kNotificationRSSDataReceived notification received. 
 - (nullable NSArray <FeedItem *> *)feeds;
 
 @end
