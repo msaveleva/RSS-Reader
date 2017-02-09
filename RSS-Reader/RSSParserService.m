@@ -9,6 +9,10 @@
 #import "RSSParserService.h"
 #import "FeedItem.h"
 
+static NSString * const kItemKey = @"item";
+static NSString * const kTitleKey = @"title";
+static NSString * const kDescriptionKey = @"description";
+
 @interface RSSParserService ()
 
 @property (nonatomic, strong, nullable) NSXMLParser *xmlParser;
@@ -45,33 +49,36 @@
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict {
     self.tmpElement = elementName;
 
-    if ([self.tmpElement isEqualToString:@"item"]) {
+    if ([self.tmpElement isEqualToString:kItemKey]) {
         self.tmpItem = [NSMutableDictionary new];
         self.tmpTitle = [NSMutableString new];
         self.tmpDescription = [NSMutableString new];
-    } else if ([qName isEqualToString:@"media:thumbnail"]) {
-        //Add image to current item
-        NSString *imageUrl = attributeDict[@"url"];
-
-        if (imageUrl != nil) {
-            [self.tmpItem setObject:imageUrl forKey:@"imageUrl"];
-        }
     }
+
+    //Code for image parsing. In progress.
+//    else if ([qName isEqualToString:@"media:thumbnail"]) {
+//        //Add image to current item
+//        NSString *imageUrl = attributeDict[@"url"];
+//
+//        if (imageUrl != nil) {
+//            [self.tmpItem setObject:imageUrl forKey:@"imageUrl"];
+//        }
+//    }
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
-    if ([elementName isEqualToString:@"item"]) {
-        [self.tmpItem setObject:self.tmpTitle forKey:@"title"];
-        [self.tmpItem setObject:self.tmpDescription forKey:@"description"];
+    if ([elementName isEqualToString:kItemKey]) {
+        [self.tmpItem setObject:self.tmpTitle forKey:kTitleKey];
+        [self.tmpItem setObject:self.tmpDescription forKey:kDescriptionKey];
 
         [self.feeds addObject:[self.tmpItem copy]];
     }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    if ([self.tmpElement isEqualToString:@"title"]) {
+    if ([self.tmpElement isEqualToString:kTitleKey]) {
         [self.tmpTitle appendString:string];
-    } else if ([self.tmpElement isEqualToString:@"description"]) {
+    } else if ([self.tmpElement isEqualToString:kDescriptionKey]) {
         [self.tmpDescription appendString:string];
     }
 }
