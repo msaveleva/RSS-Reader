@@ -74,6 +74,12 @@ static NSString * const kCellId = @"MainTableViewCellId";
 
 #pragma mark - UITableViewDataSource methods
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    Feed *feed = [SourcesManager sharedInstance].feeds[section];
+
+    return feed.source.srcTitle;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [SourcesManager sharedInstance].feeds.count;
 }
@@ -86,7 +92,7 @@ static NSString * const kCellId = @"MainTableViewCellId";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
-    
+
     if ([SourcesManager sharedInstance].feeds.count - 1 >= indexPath.section) {
         Feed *currentFeed = [SourcesManager sharedInstance].feeds[indexPath.section];
 
