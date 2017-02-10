@@ -6,9 +6,9 @@
 //  Copyright © 2017 MariaSaveleva. All rights reserved.
 //
 
-#import "MainCollectionViewCell.h"
+#import "MainTableViewCell.h"
 
-@interface MainCollectionViewCell ()
+@interface MainTableViewCell ()
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -16,7 +16,7 @@
 @end
 
 
-@implementation MainCollectionViewCell
+@implementation MainTableViewCell
 
 #pragma mark - Public methods
 
