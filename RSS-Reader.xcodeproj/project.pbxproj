@@ -17,6 +17,7 @@
 		CF43BEDB1E4B11960011A594 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF43BED91E4B11960011A594 /* LaunchScreen.storyboard */; };
 		CF43BEE51E4B12540011A594 /* SourcesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BEE41E4B12540011A594 /* SourcesManager.m */; };
 		CF43BEE91E4B12B40011A594 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BEE81E4B12B40011A594 /* FeedItem.m */; };
+		CFB26ECF1E4E879B0016594D /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CFB26ECE1E4E879B0016594D /* FeedViewController.m */; };
 		CFD393E01E4B348A00EF587C /* ConnectionSerivce.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD393DF1E4B348A00EF587C /* ConnectionSerivce.m */; };
 		CFD393E41E4B380600EF587C /* RSSParserService.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD393E31E4B380600EF587C /* RSSParserService.m */; };
 		CFDDFF4D1E4D83D600C52273 /* FeedSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDDFF4C1E4D83D600C52273 /* FeedSource.m */; };
@@ -42,6 +43,8 @@
 		CF43BEE41E4B12540011A594 /* SourcesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourcesManager.m; sourceTree = "<group>"; };
 		CF43BEE71E4B12B40011A594 /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
 		CF43BEE81E4B12B40011A594 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
+		CFB26ECD1E4E879B0016594D /* FeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		CFB26ECE1E4E879B0016594D /* FeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		CFD393DE1E4B348A00EF587C /* ConnectionSerivce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionSerivce.h; sourceTree = "<group>"; };
 		CFD393DF1E4B348A00EF587C /* ConnectionSerivce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionSerivce.m; sourceTree = "<group>"; };
 		CFD393E21E4B380600EF587C /* RSSParserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParserService.h; sourceTree = "<group>"; };
@@ -77,6 +80,8 @@
 			children = (
 				CF43BED11E4B11960011A594 /* ViewController.h */,
 				CF43BED21E4B11960011A594 /* ViewController.m */,
+				CFB26ECD1E4E879B0016594D /* FeedViewController.h */,
+				CFB26ECE1E4E879B0016594D /* FeedViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -249,6 +254,7 @@
 				CF43BEE91E4B12B40011A594 /* FeedItem.m in Sources */,
 				CF43BED01E4B11960011A594 /* AppDelegate.m in Sources */,
 				CF43BEE51E4B12540011A594 /* SourcesManager.m in Sources */,
+				CFB26ECF1E4E879B0016594D /* FeedViewController.m in Sources */,
 				CF43BECD1E4B11960011A594 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
