@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "SourcesManager.h"
 #import "FeedItem.h"
+#import "FeedSource.h"
+#import "Feed.h"
 #import "MainTableViewCell.h"
 #import "Constants.h"
 
@@ -49,7 +51,10 @@ static NSString * const kCellId = @"MainTableViewCellId";
 //TODO: remove
 - (void)testLoadingFeeds {
     NSString *kRSSTestString = @"http://images.apple.com/main/rss/hotnews/hotnews.rss";
-    [[SourcesManager sharedInstance] fetchFeedItemsForSource:kRSSTestString];
+    FeedSource *source = [[FeedSource alloc] initWithTitle:@"Apple's news"
+                                                 urlString:kRSSTestString];
+
+    [[SourcesManager sharedInstance] fetchFeedItemsForSource:source];
 }
 
 - (void)configureUI {
@@ -70,18 +75,25 @@ static NSString * const kCellId = @"MainTableViewCellId";
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1; //TODO: change
+    return [SourcesManager sharedInstance].feeds.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [SourcesManager sharedInstance].feeds.count;
+    Feed *feed = [SourcesManager sharedInstance].feeds[section];
+
+    return feed.feedItems.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
-    if (([SourcesManager sharedInstance].feeds.count - 1) >= indexPath.row) {
-        FeedItem *feed = [SourcesManager sharedInstance].feeds[indexPath.row];
-        [cell configureCellWith:feed.title description:feed.feedDescription];
+    
+    if ([SourcesManager sharedInstance].feeds.count - 1 >= indexPath.section) {
+        Feed *currentFeed = [SourcesManager sharedInstance].feeds[indexPath.section];
+
+        if (currentFeed.feedItems.count - 1 >= indexPath.row) {
+            FeedItem *feed = currentFeed.feedItems[indexPath.row];
+            [cell configureCellWith:feed.title description:feed.feedDescription];
+        }
     }
 
     return cell;
