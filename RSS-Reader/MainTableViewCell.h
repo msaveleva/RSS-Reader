@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainCollectionViewCell : UICollectionViewCell
+@interface MainTableViewCell : UITableViewCell
 
 - (void)configureCellWith:(NSString *)title description:(NSString *)description;
 

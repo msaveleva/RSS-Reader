@@ -9,14 +9,14 @@
 #import "ViewController.h"
 #import "SourcesManager.h"
 #import "FeedItem.h"
-#import "MainCollectionViewCell.h"
+#import "MainTableViewCell.h"
 #import "Constants.h"
 
-static NSString * const kCellId = @"MainCollectionViewCellId";
+static NSString * const kCellId = @"MainTableViewCellId";
 
-@interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -28,6 +28,7 @@ static NSString * const kCellId = @"MainCollectionViewCellId";
 
     //TODO: remove
     [self testLoadingFeeds];
+    [self configureUI];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,29 +52,33 @@ static NSString * const kCellId = @"MainCollectionViewCellId";
     [[SourcesManager sharedInstance] fetchFeedItemsForSource:kRSSTestString];
 }
 
+- (void)configureUI {
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140.0;
+}
+
 
 #pragma mark - Notification handling
 
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.collectionView reloadData];
+        [self.tableView reloadData];
     });
 }
 
 
-#pragma mark - UICollectionViewDataSource methods
+#pragma mark - UITableViewDataSource methods
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1; //TODO: change
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [SourcesManager sharedInstance].feeds.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    MainCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellId
-                                                                             forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     if (([SourcesManager sharedInstance].feeds.count - 1) >= indexPath.row) {
         FeedItem *feed = [SourcesManager sharedInstance].feeds[indexPath.row];
         [cell configureCellWith:feed.title description:feed.feedDescription];
