@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Feed : NSObject
 
-- (nullable NSArray <FeedItem *> *)feedItems;
 - (FeedSource *)source;
+- (NSArray <FeedItem *> *)feedItems;
 
 - (instancetype)initWithSource:(FeedSource *)source feedItems:(NSArray <FeedItem *> *)feedItems;
 
