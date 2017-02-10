@@ -103,6 +103,7 @@
 		CF43BECA1E4B11960011A594 /* RSS-Reader */ = {
 			isa = PBXGroup;
 			children = (
+				CFDDFF4A1E4D822400C52273 /* Categories */,
 				CF047CCF1E4C43DD0053B48B /* Views */,
 				CF047CCE1E4C421B0053B48B /* ViewControllers */,
 				CF047CCA1E4C40890053B48B /* Helpers */,
@@ -155,6 +156,13 @@
 				CFD393E31E4B380600EF587C /* RSSParserService.m */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		CFDDFF4A1E4D822400C52273 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

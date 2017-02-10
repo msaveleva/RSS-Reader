@@ -28,6 +28,7 @@ static NSString * const kCellId = @"MainTableViewCellId";
 
     //TODO: remove
     [self testLoadingFeeds];
+    [self configureUI];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,6 +50,11 @@ static NSString * const kCellId = @"MainTableViewCellId";
 - (void)testLoadingFeeds {
     NSString *kRSSTestString = @"http://images.apple.com/main/rss/hotnews/hotnews.rss";
     [[SourcesManager sharedInstance] fetchFeedItemsForSource:kRSSTestString];
+}
+
+- (void)configureUI {
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140.0;
 }
 
 
