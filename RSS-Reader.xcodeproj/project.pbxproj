@@ -19,6 +19,8 @@
 		CF43BEE91E4B12B40011A594 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CF43BEE81E4B12B40011A594 /* FeedItem.m */; };
 		CFD393E01E4B348A00EF587C /* ConnectionSerivce.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD393DF1E4B348A00EF587C /* ConnectionSerivce.m */; };
 		CFD393E41E4B380600EF587C /* RSSParserService.m in Sources */ = {isa = PBXBuildFile; fileRef = CFD393E31E4B380600EF587C /* RSSParserService.m */; };
+		CFDDFF4D1E4D83D600C52273 /* FeedSource.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDDFF4C1E4D83D600C52273 /* FeedSource.m */; };
+		CFDDFF501E4D848500C52273 /* Feed.m in Sources */ = {isa = PBXBuildFile; fileRef = CFDDFF4F1E4D848500C52273 /* Feed.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,10 @@
 		CFD393DF1E4B348A00EF587C /* ConnectionSerivce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionSerivce.m; sourceTree = "<group>"; };
 		CFD393E21E4B380600EF587C /* RSSParserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSParserService.h; sourceTree = "<group>"; };
 		CFD393E31E4B380600EF587C /* RSSParserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSParserService.m; sourceTree = "<group>"; };
+		CFDDFF4B1E4D83D600C52273 /* FeedSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedSource.h; sourceTree = "<group>"; };
+		CFDDFF4C1E4D83D600C52273 /* FeedSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedSource.m; sourceTree = "<group>"; };
+		CFDDFF4E1E4D848500C52273 /* Feed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
+		CFDDFF4F1E4D848500C52273 /* Feed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feed.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +109,6 @@
 		CF43BECA1E4B11960011A594 /* RSS-Reader */ = {
 			isa = PBXGroup;
 			children = (
-				CFDDFF4A1E4D822400C52273 /* Categories */,
 				CF047CCF1E4C43DD0053B48B /* Views */,
 				CF047CCE1E4C421B0053B48B /* ViewControllers */,
 				CF047CCA1E4C40890053B48B /* Helpers */,
@@ -143,6 +148,10 @@
 			children = (
 				CF43BEE71E4B12B40011A594 /* FeedItem.h */,
 				CF43BEE81E4B12B40011A594 /* FeedItem.m */,
+				CFDDFF4B1E4D83D600C52273 /* FeedSource.h */,
+				CFDDFF4C1E4D83D600C52273 /* FeedSource.m */,
+				CFDDFF4E1E4D848500C52273 /* Feed.h */,
+				CFDDFF4F1E4D848500C52273 /* Feed.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -156,13 +165,6 @@
 				CFD393E31E4B380600EF587C /* RSSParserService.m */,
 			);
 			name = Services;
-			sourceTree = "<group>";
-		};
-		CFDDFF4A1E4D822400C52273 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,7 +240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFD393E41E4B380600EF587C /* RSSParserService.m in Sources */,
+				CFDDFF501E4D848500C52273 /* Feed.m in Sources */,
 				CF43BED31E4B11960011A594 /* ViewController.m in Sources */,
+				CFDDFF4D1E4D83D600C52273 /* FeedSource.m in Sources */,
 				CF047CD21E4C43F70053B48B /* MainTableViewCell.m in Sources */,
 				CFD393E01E4B348A00EF587C /* ConnectionSerivce.m in Sources */,
 				CF047CCD1E4C40D10053B48B /* Constants.m in Sources */,
