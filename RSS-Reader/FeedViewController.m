@@ -7,10 +7,12 @@
 //
 
 #import "FeedViewController.h"
+#import "FeedItem.h"
 
 @interface FeedViewController ()
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic, nullable) FeedItem *feedItem;
 
 @end
 
@@ -19,8 +21,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    //TODO: change to feed link
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.ru"]];
     [self.webView loadRequest:request];
+}
+
+
+#pragma mark - Public methods
+
+- (void)configureWithFeed:(FeedItem *)feedItem {
+    self.feedItem = feedItem;
+    //TODO: load page from link
 }
 
 @end

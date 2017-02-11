@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class FeedItem;
+
 @interface FeedViewController : UIViewController
+
+- (void)configureWithFeed:(FeedItem *)feedItem;
 
 @end

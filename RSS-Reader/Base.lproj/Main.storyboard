@@ -60,7 +60,7 @@
                                         <connections>
                                             <outlet property="descriptionLabel" destination="CQe-A2-Qi0" id="Ige-WK-Rdm"/>
                                             <outlet property="titleLabel" destination="r0h-dY-gH5" id="hnq-Ik-u4e"/>
-                                            <segue destination="f4N-t5-snK" kind="show" id="GrG-yG-b8z"/>
+                                            <segue destination="f4N-t5-snK" kind="show" identifier="FeedControllerSegueId" id="GrG-yG-b8z"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
