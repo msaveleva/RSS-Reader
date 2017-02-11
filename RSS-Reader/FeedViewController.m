@@ -27,7 +27,7 @@
     [super viewWillAppear:animated];
 
     NSString *encodedLink =
-    [self.feedItem.link stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+        [self.feedItem.link stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:encodedLink]];
     [self.webView loadRequest:request];
 }
