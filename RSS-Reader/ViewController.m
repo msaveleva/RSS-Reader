@@ -13,6 +13,7 @@
 #import "Feed.h"
 #import "MainTableViewCell.h"
 #import "Constants.h"
+#import "FeedViewController.h"
 
 static NSString * const kCellId = @"MainTableViewCellId";
 
@@ -60,6 +61,19 @@ static NSString * const kCellId = @"MainTableViewCellId";
 - (void)configureUI {
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 140.0;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:kFeedControllerSegueId]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        Feed *feed = [SourcesManager sharedInstance].feeds[indexPath.section];
+        FeedItem *item = feed.feedItems[indexPath.row];
+
+        FeedViewController *destinationController = segue.destinationViewController;
+        [destinationController configureWithFeed:item];
+        
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
 }
 
 

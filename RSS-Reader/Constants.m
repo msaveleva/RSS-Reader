@@ -10,3 +10,6 @@
 
 //Notifications
 NSString * const kNotificationRSSDataReceived = @"NotificationRSSDataReceived";
+
+//Segue
+NSString * const kFeedControllerSegueId = @"FeedControllerSegueId";

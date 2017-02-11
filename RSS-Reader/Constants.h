@@ -9,3 +9,5 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const kNotificationRSSDataReceived;
+
+extern NSString * const kFeedControllerSegueId;

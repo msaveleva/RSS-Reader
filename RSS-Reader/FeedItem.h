@@ -8,13 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FeedItem : NSObject
 
 - (nullable NSString *)title;
 - (nullable NSString *)feedDescription;
+- (nullable NSString *)link;
 
 /// Creates an instance of FeedItem with title and feedDescription.
-- (nonnull instancetype)initWithTitle:(nullable NSString *)title
-                      feedDescription:(nullable NSString *)feedDescription;
+- (instancetype)initWithTitle:(nullable NSString *)title
+              feedDescription:(nullable NSString *)feedDescription
+                         link:(nullable NSString *)link;
 
 @end
+
+NS_ASSUME_NONNULL_END

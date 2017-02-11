@@ -12,18 +12,21 @@
 
 @property (nonatomic, strong, nullable) NSString *title;
 @property (nonatomic, strong, nullable) NSString *feedDescription;
+@property (nonatomic, strong, nullable) NSString *link;
 
 @end
 
 @implementation FeedItem
 
-- (nonnull instancetype)initWithTitle:(nullable NSString *)title
-                      feedDescription:(nullable NSString *)feedDescription {
+- (instancetype)initWithTitle:(nullable NSString *)title
+              feedDescription:(nullable NSString *)feedDescription
+                         link:(nullable NSString *)link {
     self = [super init];
 
     if (self) {
         _title = title;
         _feedDescription = feedDescription;
+        _link = link;
     }
 
     return self;
