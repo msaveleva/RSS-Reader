@@ -12,6 +12,7 @@
 static NSString * const kItemKey = @"item";
 static NSString * const kTitleKey = @"title";
 static NSString * const kDescriptionKey = @"description";
+static NSString * const kLinkKey = @"link";
 
 @interface RSSParserService ()
 
@@ -20,6 +21,7 @@ static NSString * const kDescriptionKey = @"description";
 @property (nonatomic, strong, nullable) NSMutableArray <FeedItem *> *tmpFeeds;
 @property (nonatomic, strong, nullable) NSMutableString *tmpTitle;
 @property (nonatomic, strong, nullable) NSMutableString *tmpDescription;
+@property (nonatomic, strong, nullable) NSMutableString *tmpLink;
 @property (nonatomic, strong, nullable) NSString *tmpElement;
 
 @end
@@ -52,6 +54,7 @@ static NSString * const kDescriptionKey = @"description";
     if ([self.tmpElement isEqualToString:kItemKey]) {
         self.tmpTitle = [NSMutableString new];
         self.tmpDescription = [NSMutableString new];
+        self.tmpLink = [NSMutableString new];
     }
 
     //Code for image parsing. In progress.
@@ -68,7 +71,8 @@ static NSString * const kDescriptionKey = @"description";
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
     if ([elementName isEqualToString:kItemKey]) {
         FeedItem *feedItem = [[FeedItem alloc] initWithTitle:self.tmpTitle
-                                             feedDescription:self.tmpDescription];
+                                             feedDescription:self.tmpDescription
+                                                        link:self.tmpLink];
 
         [self.tmpFeeds addObject:feedItem];
     }
@@ -79,6 +83,8 @@ static NSString * const kDescriptionKey = @"description";
         [self.tmpTitle appendString:string];
     } else if ([self.tmpElement isEqualToString:kDescriptionKey]) {
         [self.tmpDescription appendString:string];
+    } else if ([self.tmpElement isEqualToString:kLinkKey]) {
+        [self.tmpLink appendString:string];
     }
 }
 

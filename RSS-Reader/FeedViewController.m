@@ -21,9 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //TODO: change to feed link
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.ru"]];
-    [self.webView loadRequest:request];
 }
 
 
@@ -31,7 +28,9 @@
 
 - (void)configureWithFeed:(FeedItem *)feedItem {
     self.feedItem = feedItem;
-    //TODO: load page from link
+
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.feedItem.link]];
+    [self.webView loadRequest:request];
 }
 
 @end
