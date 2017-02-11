@@ -9,7 +9,7 @@
 #import "FeedViewController.h"
 #import "FeedItem.h"
 
-@interface FeedViewController ()
+@interface FeedViewController () <UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic, nullable) FeedItem *feedItem;
@@ -23,14 +23,35 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    NSString *encodedLink =
+    [self.feedItem.link stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLFragmentAllowedCharacterSet]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:encodedLink]];
+    [self.webView loadRequest:request];
+}
+
 
 #pragma mark - Public methods
 
 - (void)configureWithFeed:(FeedItem *)feedItem {
     self.feedItem = feedItem;
+}
 
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.feedItem.link]];
-    [self.webView loadRequest:request];
+
+#pragma mark - UIWebViewDelegate methods
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"Error during loading page: %@", error.description); 
 }
 
 @end
