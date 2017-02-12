@@ -75,6 +75,25 @@
     return [_feedSources copy];
 }
 
+- (void)addFeedSource:(FeedSource *)feedSource {
+    [_feedSources addObject:feedSource];
+    [self fetchFeedItemsForSource:feedSource];
+}
+
+- (void)removeFeedSource:(FeedSource *)feedSource {
+    [_feedSources removeObject:feedSource];
+
+    for (Feed *feed in self.feeds) {
+        if ([feed.source.srcTitle isEqualToString:feedSource.srcTitle] &&
+            [feed.source.srcUrlString isEqualToString:feedSource.srcUrlString]) {
+            [_feeds removeObject:feed];
+            break;
+        }
+    }
+
+    [self postUpdateNotification];
+}
+
 
 #pragma mark - Private methods
 
@@ -84,6 +103,11 @@
     }
 
     return _connectionService;
+}
+
+- (void)postUpdateNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRSSDataUpdated
+                                                        object:nil];
 }
 
 
@@ -96,8 +120,7 @@
     [_feeds addObject:feed];
     [self.parserServices removeObject:parserService];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRSSDataReceived
-                                                        object:nil];
+    [self postUpdateNotification];
 }
 
 @end
