@@ -71,7 +71,7 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
             if (isValidTitle && isValidURL) {
                 FeedSource *feedSource = [[FeedSource alloc] initWithTitle:weakSelf.sourceTitleTextField.text
                                                                  urlString:weakSelf.sourceURLTextField.text];
-                [[SourcesManager sharedInstance] fetchFeedItemsForSource:feedSource];
+                [[SourcesManager sharedInstance] addFeedSource:feedSource];
             } else {
                 if (!isValidTitle) {
                     NSLog(@"Error: invalid title");
