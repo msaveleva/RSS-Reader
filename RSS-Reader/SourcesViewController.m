@@ -127,4 +127,21 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if ([[SourcesManager sharedInstance] feedSources].count - 1 >= indexPath.row) {
+            FeedSource *feedSource = [[SourcesManager sharedInstance] feedSources][indexPath.row];
+            [[SourcesManager sharedInstance] removeFeedSource:feedSource];
+            [self.tableView reloadData];
+        }
+    }
+}
+
+
+#pragma mark - UITableViewDelegate methods
+
 @end
