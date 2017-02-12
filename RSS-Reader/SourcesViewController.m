@@ -86,6 +86,9 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
             }
         }];
         [_alertController addAction:okAction];
+    } else {
+        self.sourceTitleTextField.text = nil;
+        self.sourceURLTextField.text = nil;
     }
 
     return _alertController;
