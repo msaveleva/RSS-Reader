@@ -8,6 +8,7 @@
 
 #import "RSSParserService.h"
 #import "FeedItem.h"
+#import "FeedSource.h"
 
 static NSString * const kItemKey = @"item";
 static NSString * const kTitleKey = @"title";
@@ -17,6 +18,7 @@ static NSString * const kLinkKey = @"link";
 @interface RSSParserService ()
 
 @property (nonatomic, strong, nullable) NSXMLParser *xmlParser;
+@property (nonatomic, strong) FeedSource *feedSource;
 
 @property (nonatomic, strong, nullable) NSMutableArray <FeedItem *> *tmpFeeds;
 @property (nonatomic, strong, nullable) NSMutableString *tmpTitle;
@@ -31,6 +33,14 @@ static NSString * const kLinkKey = @"link";
 
 #pragma mark - Public methods
 
+- (void)parseData:(NSData *)data forFeedSource:(FeedSource *)feedSource {
+    self.feedSource = feedSource;
+    [self parseData:data];
+}
+
+
+#pragma mark - Private methods
+
 - (void)parseData:(NSData *)data {
     self.tmpFeeds = [NSMutableArray new];
 
@@ -41,9 +51,6 @@ static NSString * const kLinkKey = @"link";
     self.xmlParser.shouldReportNamespacePrefixes = YES;
     [self.xmlParser parse];
 }
-
-
-#pragma mark - Private methods
 
 
 #pragma mark - NSXMLParserDelegate methods
@@ -89,7 +96,9 @@ static NSString * const kLinkKey = @"link";
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
-    [self.delegate handleParsedData:[self.tmpFeeds copy]];
+    [self.delegate handleParsedData:[self.tmpFeeds copy]
+                      forFeedSource:self.feedSource
+                             parser:self];
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "Constants.h"
 
 //Notifications
-NSString * const kNotificationRSSDataReceived = @"NotificationRSSDataReceived";
+NSString * const kNotificationRSSDataUpdated = @"NotificationRSSDataUpdated";
 
 //Segue
 NSString * const kFeedControllerSegueId = @"FeedControllerSegueId";

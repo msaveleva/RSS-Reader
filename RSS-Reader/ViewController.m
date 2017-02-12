@@ -29,8 +29,6 @@ static NSString * const kCellId = @"MainTableViewCellId";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    //TODO: remove
-    [self testLoadingFeeds];
     [self configureUI];
 }
 
@@ -39,23 +37,15 @@ static NSString * const kCellId = @"MainTableViewCellId";
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateUI)
-                                                 name:kNotificationRSSDataReceived
+                                                 name:kNotificationRSSDataUpdated
                                                object:nil];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-//TODO: remove
-- (void)testLoadingFeeds {
-    NSString *kRSSTestString = @"http://images.apple.com/main/rss/hotnews/hotnews.rss";
-    FeedSource *source = [[FeedSource alloc] initWithTitle:@"Apple's news"
-                                                 urlString:kRSSTestString];
-
-    [[SourcesManager sharedInstance] fetchFeedItemsForSource:source];
 }
 
 - (void)configureUI {

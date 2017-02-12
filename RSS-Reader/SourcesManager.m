@@ -17,10 +17,10 @@
 @interface SourcesManager() <RSSParserServiceDelegate>
 
 @property (nonatomic, strong, nullable) ConnectionSerivce *connectionService;
-@property (nonatomic, strong, nullable) RSSParserService *parserService;
-@property (nonatomic, strong) NSMutableArray <Feed *> *feeds;
+@property (nonatomic, strong) NSMutableArray <RSSParserService *> *parserServices;
 
-@property (nonatomic, strong, nullable) FeedSource *currentlyProcessedSource;
+@property (nonatomic, strong) NSMutableArray <Feed *> *feeds;
+@property (nonatomic, strong) NSMutableArray <FeedSource *> *feedSources;
 
 @end
 
@@ -42,6 +42,8 @@
 
     if (self) {
         _feeds = [NSMutableArray new];
+        _feedSources = [NSMutableArray new];
+        _parserServices = [NSMutableArray new];
     }
 
     return self;
@@ -51,19 +53,45 @@
 #pragma mark - Public methods
 
 - (void)fetchFeedItemsForSource:(FeedSource *)rssSource {
-    self.currentlyProcessedSource = rssSource;
     NSURL *url = [NSURL URLWithString:rssSource.srcUrlString];
 
-    [self.connectionService loadDataWithURL:url completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
+    __weak typeof(self) weakSelf = self;
+    [self.connectionService loadDataWithURL:url
+                                 completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
         if (resultData != nil && error == nil) {
-            //TODO: fix to weakself
-            [self.parserService parseData:resultData];
+            RSSParserService *parserService = [RSSParserService new];
+            parserService.delegate = self;
+            [parserService parseData:resultData forFeedSource:rssSource];
+            [weakSelf.parserServices addObject:parserService];
         }
     }];
 }
 
 - (NSArray<Feed *> *)feeds {
     return [_feeds copy];
+}
+
+- (NSArray <FeedSource *> *)feedSources {
+    return [_feedSources copy];
+}
+
+- (void)addFeedSource:(FeedSource *)feedSource {
+    [_feedSources addObject:feedSource];
+    [self fetchFeedItemsForSource:feedSource];
+}
+
+- (void)removeFeedSource:(FeedSource *)feedSource {
+    [_feedSources removeObject:feedSource];
+
+    for (Feed *feed in self.feeds) {
+        if ([feed.source.srcTitle isEqualToString:feedSource.srcTitle] &&
+            [feed.source.srcUrlString isEqualToString:feedSource.srcUrlString]) {
+            [_feeds removeObject:feed];
+            break;
+        }
+    }
+
+    [self postUpdateNotification];
 }
 
 
@@ -77,24 +105,22 @@
     return _connectionService;
 }
 
-- (RSSParserService *)parserService {
-    if (_parserService == nil) {
-        _parserService = [RSSParserService new];
-        _parserService.delegate = self;
-    }
-
-    return _parserService;
+- (void)postUpdateNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRSSDataUpdated
+                                                        object:nil];
 }
 
 
 #pragma mark - RSSParserServiceDelegate methods
 
-- (void)handleParsedData:(NSArray<FeedItem *> *)feeds {
-    Feed *feed = [[Feed alloc] initWithSource:self.currentlyProcessedSource feedItems:feeds];
+- (void)handleParsedData:(NSArray<FeedItem *> *)feeds
+           forFeedSource:(FeedSource *)feedSource
+                  parser:(RSSParserService *)parserService {
+    Feed *feed = [[Feed alloc] initWithSource:feedSource feedItems:feeds];
     [_feeds addObject:feed];
+    [self.parserServices removeObject:parserService];
 
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationRSSDataReceived
-                                                        object:nil];
+    [self postUpdateNotification];
 }
 
 @end

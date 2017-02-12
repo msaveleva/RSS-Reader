@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class FeedItem;
+@class FeedSource;
+@class RSSParserService;
 
 @protocol RSSParserServiceDelegate <NSObject>
 
-- (void)handleParsedData:(NSArray <FeedItem *> *)feeds;
+- (void)handleParsedData:(NSArray <FeedItem *> *)feeds
+           forFeedSource:(FeedSource *)feedSource
+                  parser:(RSSParserService *)parserService;
 
 @end
 
@@ -20,7 +24,7 @@
 
 @property (nonatomic, strong) id<RSSParserServiceDelegate> delegate;
 
-/// Parses RSS XML data.
-- (void)parseData:(NSData *)data;
+/// Parses RSS XML data for a given feed source.
+- (void)parseData:(NSData *)data forFeedSource:(FeedSource *)feedSource;
 
 @end
