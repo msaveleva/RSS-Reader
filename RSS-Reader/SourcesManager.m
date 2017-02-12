@@ -18,9 +18,11 @@
 
 @property (nonatomic, strong, nullable) ConnectionSerivce *connectionService;
 @property (nonatomic, strong, nullable) RSSParserService *parserService;
-@property (nonatomic, strong) NSMutableArray <Feed *> *feeds;
 
 @property (nonatomic, strong, nullable) FeedSource *currentlyProcessedSource;
+
+@property (nonatomic, strong) NSMutableArray <Feed *> *feeds;
+@property (nonatomic, strong) NSMutableArray <FeedSource *> *feedSources;
 
 @end
 
@@ -42,6 +44,7 @@
 
     if (self) {
         _feeds = [NSMutableArray new];
+        _feedSources = [NSMutableArray new];
     }
 
     return self;
@@ -54,16 +57,21 @@
     self.currentlyProcessedSource = rssSource;
     NSURL *url = [NSURL URLWithString:rssSource.srcUrlString];
 
-    [self.connectionService loadDataWithURL:url completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
+    __weak typeof(self) weakSelf = self;
+    [self.connectionService loadDataWithURL:url
+                                 completion:^(NSData * _Nullable resultData, NSError * _Nullable error) {
         if (resultData != nil && error == nil) {
-            //TODO: fix to weakself
-            [self.parserService parseData:resultData];
+            [weakSelf.parserService parseData:resultData];
         }
     }];
 }
 
 - (NSArray<Feed *> *)feeds {
     return [_feeds copy];
+}
+
+- (NSArray <FeedSource *> *)feedSources {
+    return [_feedSources copy];
 }
 
 

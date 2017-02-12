@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Returnes fetched and parsed feed items. Available after kNotificationRSSDataReceived notification received. 
 - (NSArray <Feed *> *)feeds;
+- (NSArray <FeedSource *> *)feedSources;
 
 @end
 

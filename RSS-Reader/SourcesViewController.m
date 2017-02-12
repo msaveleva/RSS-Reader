@@ -7,6 +7,8 @@
 //
 
 #import "SourcesViewController.h"
+#import "SourcesManager.h"
+#import "FeedSource.h"
 
 static NSString * const kSrouceCellId = @"SrouceCellId";
 
@@ -67,7 +69,9 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
             BOOL isValidTitle = [weakSelf isValidTitle:weakSelf.sourceTitleTextField.text];
             BOOL isValidURL = [weakSelf isValidLink:weakSelf.sourceURLTextField.text];
             if (isValidTitle && isValidURL) {
-                //TODO: update data
+                FeedSource *feedSource = [[FeedSource alloc] initWithTitle:weakSelf.sourceTitleTextField.text
+                                                                 urlString:weakSelf.sourceURLTextField.text];
+                [[SourcesManager sharedInstance] fetchFeedItemsForSource:feedSource];
             } else {
                 if (!isValidTitle) {
                     NSLog(@"Error: invalid title");
@@ -101,11 +105,17 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [[SourcesManager sharedInstance] feedSources].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSrouceCellId];
+
+    if ([[SourcesManager sharedInstance] feedSources].count - 1 >= indexPath.row) {
+        FeedSource *source = [[SourcesManager sharedInstance] feedSources][indexPath.row];
+        cell.textLabel.text = source.srcTitle;
+        cell.detailTextLabel.text = source.srcUrlString;
+    }
 
     return cell;
 }
