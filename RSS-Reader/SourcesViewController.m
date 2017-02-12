@@ -13,7 +13,7 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
 @interface SourcesViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) UIAlertController *addAlertController;
+@property (nonatomic, strong) UIAlertController *alertController;
 
 @end
 
@@ -28,14 +28,16 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
 #pragma mark - Actions
 
 - (IBAction)addRSSSource:(id)sender {
-
+    [self presentViewController:self.alertController animated:YES completion:^{
+        //TODO: update data
+    }];
 }
 
 #pragma mark - Private methods
 
-- (UIAlertController *)addAlertController {
-    if (_addAlertController == nil) {
-        _addAlertController = [UIAlertController alertControllerWithTitle:@"Add RSS source"
+- (UIAlertController *)alertController {
+    if (_alertController == nil) {
+        _alertController = [UIAlertController alertControllerWithTitle:@"Add RSS source"
                                                                   message:@""
                                                            preferredStyle:UIAlertControllerStyleAlert];
 
@@ -44,15 +46,29 @@ static NSString * const kSrouceCellId = @"SrouceCellId";
                                                              handler:^(UIAlertAction * _Nonnull action) {
             //do nothing
         }];
-        [_addAlertController addAction:cancelAction];
+        [_alertController addAction:cancelAction];
 
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //TODO: implement
         }];
-        [_addAlertController addAction:okAction];
+        [_alertController addAction:okAction];
     }
 
-    return _addAlertController;
+    return _alertController;
+}
+
+- (BOOL)isValidTitle:(NSString *)title {
+    return title.length == 0 ? NO : YES;
+}
+
+- (BOOL)isValidLink:(NSString *)link {
+    NSURL *urlString = [NSURL URLWithString:link];
+
+    if (urlString != nil && urlString.scheme != nil && urlString.host != nil) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 
