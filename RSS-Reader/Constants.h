@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+//Notifications
 extern NSString * const kNotificationRSSDataUpdated;
 
+//Segue
 extern NSString * const kFeedControllerSegueId;

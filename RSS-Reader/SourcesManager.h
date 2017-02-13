@@ -14,16 +14,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// Handle all model changes. Posts kNotificationRSSDataUpdated when data changes.
 @interface SourcesManager : NSObject
 
 + (instancetype)sharedInstance;
 
-/// Returnes fetched and parsed feed items. Available after kNotificationRSSDataReceived notification received. 
+/// Returnes fetched and parsed feed items.
 - (NSArray <Feed *> *)feeds;
 
 ///Returns all feed sources.
 - (NSArray <FeedSource *> *)feedSources;
+
+/// Add new feed source and load feeds for it.
 - (void)addFeedSource:(FeedSource *)feedSource;
+
+/// Remove feed source and feeds for it. 
 - (void)removeFeedSource:(FeedSource *)feedSource; 
 
 @end

@@ -10,6 +10,6 @@
 
 @interface MainTableViewCell : UITableViewCell
 
-- (void)configureCellWith:(NSString *)title description:(NSString *)description;
+- (void)configureWith:(NSString *)title description:(NSString *)description;
 
 @end

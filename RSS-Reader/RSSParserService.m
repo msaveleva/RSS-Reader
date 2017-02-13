@@ -64,7 +64,7 @@ static NSString * const kLinkKey = @"link";
         self.tmpLink = [NSMutableString new];
     }
 
-    //Code for image parsing. In progress.
+    //TODO MSaveleva: parse image.
 //    else if ([qName isEqualToString:@"media:thumbnail"]) {
 //        //Add image to current item
 //        NSString *imageUrl = attributeDict[@"url"];

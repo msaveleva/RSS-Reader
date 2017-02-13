@@ -102,7 +102,7 @@ static NSString * const kCellId = @"MainTableViewCellId";
 
         if (currentFeed.feedItems.count - 1 >= indexPath.row) {
             FeedItem *feed = currentFeed.feedItems[indexPath.row];
-            [cell configureCellWith:feed.title description:feed.feedDescription];
+            [cell configureWith:feed.title description:feed.feedDescription];
         }
     }
 

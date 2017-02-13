@@ -13,7 +13,8 @@
 - (void)loadDataWithURL:(NSURL *)rssURL
              completion:(nullable void (^)(NSData * _Nullable resultData, NSError * _Nullable error))completion {
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *downloadTask = [session dataTaskWithURL:rssURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *downloadTask = [session dataTaskWithURL:rssURL
+                                                completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (completion) {
             completion(data, error);
         }

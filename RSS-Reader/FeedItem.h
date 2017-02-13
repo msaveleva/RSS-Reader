@@ -16,7 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)feedDescription;
 - (nullable NSString *)link;
 
-/// Creates an instance of FeedItem with title and feedDescription.
 - (instancetype)initWithTitle:(nullable NSString *)title
               feedDescription:(nullable NSString *)feedDescription
                          link:(nullable NSString *)link;

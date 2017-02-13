@@ -20,7 +20,7 @@
 
 #pragma mark - Public methods
 
-- (void)configureCellWith:(NSString *)title description:(NSString *)description {
+- (void)configureWith:(NSString *)title description:(NSString *)description {
     self.titleLabel.text = title;
     self.descriptionLabel.text = description;
 }
